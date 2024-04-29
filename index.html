@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Mantra</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        text-align: center;
+    }
+    h1 {
+        margin-top: 50px;
+    }
+    .mantra-options {
+        margin-top: 30px;
+    }
+    .mantra-option {
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .mantra-option:hover {
+        transform: translateY(-5px);
+    }
+</style>
+</head>
+<body>
+<h1>Choose Your Mantra</h1>
+<div class="mantra-options">
+    <div class="mantra-option" onclick="chooseMantra('ૐ નમઃ શિવાય')">ૐ નમઃ શિવાય</div>
+    <div class="mantra-option" onclick="chooseMantra('શ્રી ગણેશાય નમઃ')">શ્રી ગણેશાય નમઃ</div>
+    <div class="mantra-option" onclick="chooseMantra('ૐ ઐમ્ હ્રીં ક્લીમ્ ચામુંડાયૈ નમઃ')">ૐ ઐમ્ હ્રીં ક્લીમ્ ચામુંડાયૈ નમઃ</div>
+    <div class="mantra-option" onclick="chooseMantra('ૐ ઐમ્ હ્રીં ક્લીમ્ ચામુંડાયૈ નમઃ')">જય શ્રી માઈ</div>
+    <div class="mantra-option" onclick="customizeMantra()">Customize Your Mantra</div>
+</div>
+
+<script>
+    function chooseMantra(mantra) {
+        localStorage.setItem('selectedMantra', mantra);
+        window.location.href = 'mantra.html';
+    }
+
+    function customizeMantra() {
+        let customMantra = prompt('Enter your custom mantra:');
+        if (customMantra !== null && customMantra !== '') {
+            localStorage.setItem('selectedMantra', customMantra);
+            window.location.href = 'mantra.html';
+        }
+    }
+</script>
+</body>
+<footer>
+    Developed By Dwapar Buch with 💖🕉️
+</footer>
+</html>
