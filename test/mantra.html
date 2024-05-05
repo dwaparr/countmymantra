@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<header>
+    <img src="assets/logo.png" alt="logo" width="316" height="100">
+</header>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mantra Counter</title>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fff;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    #output {
+        margin-top: 160px; /* Increased margin */
+        font-size: 22px;
+        text-align: center;
+        padding: 8px;
+        background-color: #f4f4f4;
+		font-color: #fff
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: calc(100% - 40px);
+        overflow-x: auto;
+    }
+    .column {
+        display: inline-block;
+        vertical-align: top;
+        width: 200px;
+        padding: 10px;
+    }
+    .mantra {
+        font-family: 'Shrikhand', sans-serif;
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .button-container {
+        position: fixed;
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+    button {
+        font-size: 18px;
+        padding: 5px 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        margin: 0 10px;
+    }
+	button2 {
+        font-size: 18px;
+        padding: 5px 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        margin: 0 10px;
+    }
+    button:hover {
+        background-color: rgba(0, 123, 255, 0.9);
+        color: #fff;
+    }
+    #counter {
+        font-size: 18px;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        margin: 0 10px
+    }
+    @media only screen and (max-width: 600px) {
+        .button-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        #output {
+            width: 100%;
+            max-width: none;
+        }
+    }
+</style>
+</head>
+<body>
+<div id="output"></div>
+<div class="button-container">
+    <button id="btn" onclick="displayText()">Chant Mantra</button>
+    <div id="counter">Clicks: 0</div>
+    <button id="reset-btn" onclick="resetCount()">Reset Count</button>
+    <button id="change-mantra-btn" onclick="changeMantra()"><img src="assets/homepage.jpeg" alt="Change Mantra" width="24" height="24"></button>
+</div>
+
+<script>
+    let clickCount = localStorage.getItem('clickCount') ? parseInt(localStorage.getItem('clickCount')) : 0;
+    let selectedMantra = localStorage.getItem('selectedMantra') || 'Om Namah Shivaya'; // Default mantra
+
+    updateCounter();
+
+    function displayText() {
+        clickCount++;
+        localStorage.setItem('clickCount', clickCount);
+        updateCounter();
+        
+        let outputDiv = document.getElementById('output');
+        let mantra = '<span class="mantra">' + selectedMantra + '</span>';
+        let columnCount = Math.ceil(clickCount / 15);
+        
+        outputDiv.innerHTML = '';
+        
+        for (let i = 0; i < clickCount; i++) {
+            if (i % 13 === 0) {
+                let columnDiv = document.createElement('div');
+                columnDiv.classList.add('column');
+                outputDiv.appendChild(columnDiv);
+            }
+            let columns = outputDiv.querySelectorAll('.column');
+            columns[columns.length - 1].innerHTML += mantra + '<br>';
+        }
+    }
+
+    function resetCount() {
+        clickCount = 0;
+        localStorage.setItem('clickCount', clickCount);
+        updateCounter();
+        document.getElementById('output').innerHTML = '';
+    }
+
+    function updateCounter() {
+        document.getElementById('counter').innerText = 'Clicks: ' + clickCount;
+    }
+
+    function changeMantra() {
+        localStorage.removeItem('clickCount');
+        window.location.href = 'index.html';
+    }
+</script>
+<footer>
+    Developed By Dwapar Buch with 💖🕉️ and ChatGPT
+</footer>
+</body>
+</html>
