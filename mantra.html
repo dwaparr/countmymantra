@@ -137,6 +137,8 @@
             let columns = outputDiv.querySelectorAll('.column');
             columns[columns.length - 1].innerHTML += mantra + '<br>';
         }
+		// Call the function to chant the mantra
+        chantMantra(selectedMantra);
     }
 
     function resetCount() {
@@ -153,6 +155,22 @@
     function changeMantra() {
         localStorage.removeItem('clickCount');
         window.location.href = 'index.html';
+    }
+	    function chantMantra(mantra) {
+        // Create a new SpeechSynthesisUtterance instance
+        let utterance = new SpeechSynthesisUtterance(mantra);
+        
+        // Use the speech synthesis API to speak the mantra
+        window.speechSynthesis.speak(utterance);
+    }
+</script>
+<script>
+    // Check browser support for speech synthesis
+    if ('speechSynthesis' in window) {
+        // Browser supports speech synthesis.
+    } else {
+        // Browser does not support speech synthesis.
+        alert('Your browser does not support speech synthesis. Please use a modern browser.');
     }
 </script>
 <footer>
